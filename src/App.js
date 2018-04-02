@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import { addItem } from  './actions/items';
+import { bindActionCreators } from 'redux';
+
 
 class App extends Component {
 
@@ -10,6 +12,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props.addItem)
     return (
       <div className="App">
         <button onClick={(event) => this.handleOnClick(event)}>
@@ -27,4 +30,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    addItem: addItem
+  }, dispatch);
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
